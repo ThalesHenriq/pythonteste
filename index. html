@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OrbTech Ponto Pro - Controle de Ponto Digital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <style>
+    .logo-text { font-family: 'Arial Black', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b py-5">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <span class="text-4xl">🛡️</span>
+          <div>
+            <span class="logo-text text-3xl font-black tracking-tighter text-blue-700">ORBTECH</span>
+            <p class="text-xs text-blue-600 -mt-1 font-medium">PONTO PRO</p>
+          </div>
+        </div>
+      </div>
+      <a href="https://pontoloja-df6icvnyg3mp3baybyufk.streamlit.app/" 
+         target="_blank"
+         class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition">
+        Testar Grátis
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="bg-gradient-to-br from-blue-700 to-blue-800 text-white py-24">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+        Controle de ponto feito para<br>quem quer <span class="text-blue-200">simplicidade e segurança</span>
+      </h1>
+      <p class="text-xl max-w-3xl mx-auto mb-10 text-blue-100">
+        Registro com foto + localização (GPS ou Wi-Fi). 
+        Gere espelho de ponto em PDF pronto para assinatura e entrega ao contador.
+      </p>
+      <a href="https://pontoloja-df6icvnyg3mp3baybyufk.streamlit.app/" 
+         target="_blank"
+         class="inline-block bg-white text-blue-700 hover:bg-blue-50 font-bold text-xl px-12 py-6 rounded-2xl shadow-xl transition">
+        Acessar Demo Gratuita →
+      </a>
+    </div>
+  </header>
+
+  <!-- Planos de Preços -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4">Escolha o plano ideal para sua empresa</h2>
+      <p class="text-center text-gray-600 mb-12">Sem taxa de instalação • Cancelamento a qualquer momento</p>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        
+        <!-- Plano 1 -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 hover:border-blue-500 transition">
+          <h3 class="text-2xl font-semibold mb-2">Básico</h3>
+          <p class="text-gray-500">Ideal para pequenas equipes</p>
+          <div class="my-8">
+            <span class="text-5xl font-bold text-blue-700">R$ 59</span>
+            <span class="text-gray-500">/mês</span>
+          </div>
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Até 10 funcionários</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Foto obrigatória</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Trava por IP</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Espelho de ponto em PDF</li>
+          </ul>
+          <a href="https://pontoloja-df6icvnyg3mp3baybyufk.streamlit.app/" target="_blank"
+             class="block text-center py-4 border border-blue-600 text-blue-600 rounded-2xl hover:bg-blue-50 font-semibold">
+            Testar Grátis
+          </a>
+        </div>
+
+        <!-- Plano 2 (Mais popular) -->
+        <div class="bg-white border-2 border-blue-600 rounded-3xl p-8 relative scale-105 shadow-xl">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-sm px-6 py-1 rounded-full font-semibold">
+            MAIS POPULAR
+          </div>
+          <h3 class="text-2xl font-semibold mb-2">Profissional</h3>
+          <p class="text-gray-500">Para empresas em crescimento</p>
+          <div class="my-8">
+            <span class="text-5xl font-bold text-blue-700">R$ 89</span>
+            <span class="text-gray-500">/mês</span>
+          </div>
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Até 30 funcionários</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> GPS + IP</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Relatórios completos</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Suporte prioritário</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Exportação Excel + PDF</li>
+          </ul>
+          <a href="https://pontoloja-df6icvnyg3mp3baybyufk.streamlit.app/" target="_blank"
+             class="block text-center py-4 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 font-semibold">
+            Começar Agora
+          </a>
+        </div>
+
+        <!-- Plano 3 -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 hover:border-blue-500 transition">
+          <h3 class="text-2xl font-semibold mb-2">Empresa</h3>
+          <p class="text-gray-500">Para equipes maiores</p>
+          <div class="my-8">
+            <span class="text-5xl font-bold text-blue-700">R$ 139</span>
+            <span class="text-gray-500">/mês</span>
+          </div>
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Funcionários ilimitados</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> GPS + IP + Personalização</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Múltiplas unidades</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Suporte dedicado</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Integração com folha de pagamento</li>
+          </ul>
+          <a href="https://pontoloja-df6icvnyg3mp3baybyufk.streamlit.app/" target="_blank"
+             class="block text-center py-4 border border-blue-600 text-blue-600 rounded-2xl hover:bg-blue-50 font-semibold">
+            Falar com Vendas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">O que nossos clientes dizem</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 p-8 rounded-3xl">
+          <p class="italic text-gray-700">"Reduziu muito as discussões sobre horário. O espelho de ponto em PDF é excelente, o contador adorou!"</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl">👩🏻‍💼</div>
+            <div>
+              <p class="font-semibold">Mariana Costa</p>
+              <p class="text-sm text-gray-500">Dona - Boutique Elegance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-8 rounded-3xl">
+          <p class="italic text-gray-700">"A trava por GPS acabou com as fraudes. Meus funcionários só conseguem bater ponto dentro da loja. Simples e eficiente."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl">👨🏻‍💼</div>
+            <div>
+              <p class="font-semibold">Roberto Mendes</p>
+              <p class="text-sm text-gray-500">Gerente - Auto Peças RJ</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 p-8 rounded-3xl">
+          <p class="italic text-gray-700">"Melhor investimento que fiz em 2025. Fácil de usar, barato e o PDF já sai pronto para entregar."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl">👩🏽</div>
+            <div>
+              <p class="font-semibold">Juliana Ferreira</p>
+              <p class="text-sm text-gray-500">Proprietária - Salão Beleza & Cia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="bg-blue-700 text-white py-20 text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-6">Pronto para acabar com a dor de cabeça do controle de ponto?</h2>
+      <p class="text-xl mb-10">Teste agora mesmo sem compromisso.</p>
+      
+      <a href="https://pontoloja-df6icvnyg3mp3baybyufk.streamlit.app/" 
+         target="_blank"
+         class="inline-block bg-white text-blue-700 hover:bg-blue-50 font-bold text-2xl px-16 py-7 rounded-3xl shadow-2xl transition">
+        Acessar Sistema de Demonstração
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-3xl">🛡️</span>
+        <span class="logo-text text-3xl font-black tracking-tighter text-white">ORBTECH</span>
+      </div>
+      <p class="text-sm">© 2026 OrbTech Soluções Digitais • Todos os direitos reservados</p>
+      <p class="text-xs mt-4">Sistema de controle de ponto conforme Portaria 671/2021</p>
+    </div>
+  </footer>
+
+</body>
+</html>
