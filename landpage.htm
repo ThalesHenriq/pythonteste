@@ -1,0 +1,516 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrbTech | MultiSistemas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-text { background: linear-gradient(90deg, #2563eb, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-hover:hover { transform: translateY(-12px); transition: all 0.4s ease; }
+    .logo-font { font-family: 'Arial Black', sans-serif; letter-spacing: -2px; }
+    
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 32px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      animation: modalOpen 0.3s ease;
+    }
+    
+    @keyframes modalOpen {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .modal-close:hover {
+      background: #e2e8f0;
+      transform: rotate(90deg);
+    }
+    
+    /* Badge de novo sistema */
+    .new-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      padding: 0.25rem 1rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+  <!-- Modal Overlay (janela interna) -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-content" id="modalContent">
+      <div class="modal-close" onclick="closeModal()">✕</div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Navbar Fixa -->
+  <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-4xl">🛡️</span>
+        <div>
+          <span class="logo-font text-3xl font-black text-blue-700 tracking-tighter">ORBTECH</span>
+          <p class="text-xs text-blue-600 -mt-1 font-semibold">SOLUÇÕES INTEGRADAS</p>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-10 font-medium">
+        <a href="#sistemas" class="hover:text-blue-600 transition">Sistemas</a>
+        <a href="#planos" class="hover:text-blue-600 transition">Planos</a>
+        <a href="#depoimentos" class="hover:text-blue-600 transition">Depoimentos</a>
+      </div>
+      <button onclick="openModal('contato')" class="bg-blue-600 text-white px-7 py-3 rounded-2xl font-semibold hover:bg-blue-700 transition">
+        Testar Grátis
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-32 pb-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+        Soluções completas para <span class="gradient-text">seu negócio</span>
+      </h1>
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto mb-10">
+        Do controle de ponto ao holerite digital. Tudo integrado em um só lugar, com segurança e praticidade.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="openModal('ponto')" class="bg-blue-600 text-white text-lg px-10 py-5 rounded-2xl font-semibold hover:bg-blue-700 transition">
+          Conhecer Sistemas
+        </button>
+        <a href="#planos" class="bg-white border-2 border-blue-600 text-blue-600 text-lg px-10 py-5 rounded-2xl font-semibold hover:bg-blue-50 transition">
+          Ver Planos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Sistemas (Cards de Prévia) -->
+  <section id="sistemas" class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4">Nossos Sistemas</h2>
+      <p class="text-center text-slate-600 mb-12">Clique em cada card para conhecer os detalhes</p>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="systemsGrid">
+        <!-- Card 1: Ponto Eletrônico -->
+        <div class="bg-white p-8 rounded-3xl card-hover shadow relative cursor-pointer" onclick="openModal('ponto')">
+          <span class="text-5xl mb-4 block">⏰</span>
+          <h3 class="text-2xl font-bold mb-2">Ponto Eletrônico</h3>
+          <p class="text-slate-600 mb-4">Controle de ponto com foto obrigatória e trava por GPS</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full">Selfie</span>
+            <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full">GPS</span>
+            <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full">PDF</span>
+          </div>
+          <button class="mt-6 text-blue-600 font-semibold flex items-center gap-2">
+            Saiba mais <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Card 2: Holerite Digital (NOVO) -->
+        <div class="bg-white p-8 rounded-3xl card-hover shadow relative cursor-pointer" onclick="openModal('holerite')">
+          <span class="absolute top-4 right-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full">NOVO</span>
+          <span class="text-5xl mb-4 block">📄</span>
+          <h3 class="text-2xl font-bold mb-2">Holerite Digital</h3>
+          <p class="text-slate-600 mb-4">Geração automática de holerites e envio por WhatsApp</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">PDF</span>
+            <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">WhatsApp</span>
+            <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">Arquivo</span>
+          </div>
+          <button class="mt-6 text-green-600 font-semibold flex items-center gap-2">
+            Saiba mais <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Card 3: Controle de Estoque (Próximo sistema - espaço para novo) -->
+        <div class="bg-white p-8 rounded-3xl card-hover shadow relative cursor-pointer border-2 border-dashed border-blue-200" onclick="openModal('estoque')">
+          <span class="text-5xl mb-4 block">📦</span>
+          <h3 class="text-2xl font-bold mb-2">Controle de Estoque</h3>
+          <p class="text-slate-600 mb-4">Gestão completa de produtos e alertas de baixa</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full">Em breve</span>
+            <span class="bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full">Prévia</span>
+          </div>
+          <button class="mt-6 text-purple-600 font-semibold flex items-center gap-2">
+            Saiba mais <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Card 4: Gestão de Clientes (Espaço para novo sistema) -->
+        <div class="bg-white p-8 rounded-3xl card-hover shadow relative cursor-pointer border-2 border-dashed border-blue-200" onclick="openModal('clientes')">
+          <span class="text-5xl mb-4 block">👥</span>
+          <h3 class="text-2xl font-bold mb-2">Gestão de Clientes</h3>
+          <p class="text-slate-600 mb-4">CRM simples com histórico e aniversariantes</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full">Em breve</span>
+          </div>
+          <button class="mt-6 text-purple-600 font-semibold flex items-center gap-2">
+            Saiba mais <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Card 5: Agendamento (Espaço para novo sistema) -->
+        <div class="bg-white p-8 rounded-3xl card-hover shadow relative cursor-pointer border-2 border-dashed border-blue-200" onclick="openModal('agendamento')">
+          <span class="text-5xl mb-4 block">📅</span>
+          <h3 class="text-2xl font-bold mb-2">Agendamento</h3>
+          <p class="text-slate-600 mb-4">Sistema de reservas e horários</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full">Em breve</span>
+          </div>
+          <button class="mt-6 text-purple-600 font-semibold flex items-center gap-2">
+            Saiba mais <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Card 6: Em breve (Card para adicionar mais) -->
+        <div class="bg-white p-8 rounded-3xl card-hover shadow relative cursor-pointer border-2 border-dashed border-slate-200" onclick="openModal('contato')">
+          <span class="text-5xl mb-4 block">✨</span>
+          <h3 class="text-2xl font-bold mb-2">Quer um sistema personalizado?</h3>
+          <p class="text-slate-600 mb-4">Fale conosco e criamos sob medida</p>
+          <button class="mt-6 text-blue-600 font-semibold flex items-center gap-2">
+            Solicitar orçamento <i class="fas fa-whatsapp"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos (mantive igual) -->
+  <section id="planos" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4">Planos simples e transparentes</h2>
+      <p class="text-center text-slate-600 mb-12">Escolha um ou combine vários sistemas</p>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Básico -->
+        <div class="card-hover bg-white border border-slate-200 rounded-3xl p-8 text-center">
+          <h3 class="text-2xl font-bold mb-2">Básico</h3>
+          <p class="text-slate-500">1 sistema à escolha</p>
+          <div class="my-8">
+            <span class="text-5xl font-bold text-blue-700">R$ 59</span>
+            <span class="text-slate-500">/mês</span>
+          </div>
+          <ul class="space-y-4 text-left mb-10">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Ponto OU Holerite</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Até 10 funcionários</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Suporte por email</li>
+          </ul>
+          <button onclick="openModal('contato')" class="block w-full py-4 border-2 border-blue-600 text-blue-600 rounded-2xl font-semibold hover:bg-blue-50">
+            Testar Grátis
+          </button>
+        </div>
+
+        <!-- Profissional -->
+        <div class="card-hover bg-white border-2 border-blue-600 rounded-3xl p-8 text-center relative scale-105 shadow-2xl">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-sm font-bold px-6 py-1 rounded-full">
+            MAIS POPULAR
+          </div>
+          <h3 class="text-2xl font-bold mb-2">Profissional</h3>
+          <p class="text-slate-500">3 sistemas integrados</p>
+          <div class="my-8">
+            <span class="text-5xl font-bold text-blue-700">R$ 129</span>
+            <span class="text-slate-500">/mês</span>
+          </div>
+          <ul class="space-y-4 text-left mb-10">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Ponto + Holerite + Estoque</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Até 30 funcionários</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Suporte prioritário</li>
+          </ul>
+          <button onclick="openModal('contato')" class="block w-full py-4 bg-blue-600 text-white rounded-2xl font-semibold hover:bg-blue-700">
+            Começar Agora
+          </button>
+        </div>
+
+        <!-- Empresa -->
+        <div class="card-hover bg-white border border-slate-200 rounded-3xl p-8 text-center">
+          <h3 class="text-2xl font-bold mb-2">Empresa</h3>
+          <p class="text-slate-500">Todos os sistemas</p>
+          <div class="my-8">
+            <span class="text-5xl font-bold text-blue-700">R$ 199</span>
+            <span class="text-slate-500">/mês</span>
+          </div>
+          <ul class="space-y-4 text-left mb-10">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Todos os sistemas</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Funcionários ilimitados</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-green-500"></i> Suporte dedicado</li>
+          </ul>
+          <button onclick="openModal('contato')" class="block w-full py-4 border-2 border-blue-600 text-blue-600 rounded-2xl font-semibold hover:bg-blue-50">
+            Falar com Vendas
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos (mantive igual) -->
+  <section id="depoimentos" class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">O que nossos clientes dizem</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-3xl shadow">
+          <p class="italic">"O espelho de ponto em PDF facilitou muito minha vida com o contador. Sistema simples e seguro."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl">👩🏻‍💼</div>
+            <div>
+              <p class="font-semibold">Mariana Costa</p>
+              <p class="text-sm text-slate-500">Boutique Elegance</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow">
+          <p class="italic">"O holerite digital economiza papel e tempo. Meus funcionários adoram receber por WhatsApp."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl">👨🏻</div>
+            <div>
+              <p class="font-semibold">Roberto Mendes</p>
+              <p class="text-sm text-slate-500">Auto Peças Centro</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow">
+          <p class="italic">"Ter tudo integrado (ponto, holerite e estoque) facilitou demais a gestão da minha loja."</p>
+          <div class="mt-6 flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl">👩🏽</div>
+            <div>
+              <p class="font-semibold">Juliana Ferreira</p>
+              <p class="text-sm text-slate-500">Salão Beleza & Cia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="bg-blue-700 text-white py-20 text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-6">Pronto para testar qualquer sistema?</h2>
+      <p class="text-xl mb-10">Clique no sistema que deseja conhecer ou fale direto conosco.</p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button onclick="openModal('ponto')" class="bg-white text-blue-700 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-blue-50 transition">
+          Conhecer Ponto
+        </button>
+        <button onclick="openModal('holerite')" class="bg-white text-blue-700 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-blue-50 transition">
+          Conhecer Holerite
+        </button>
+        <button onclick="contatoWhatsApp()" class="bg-green-500 hover:bg-green-600 px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 justify-center transition">
+          <i class="fab fa-whatsapp text-2xl"></i> Falar no WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <span class="text-4xl">🛡️</span>
+        <span class="logo-font text-4xl font-black text-white tracking-tighter">ORBTECH</span>
+      </div>
+      <p class="text-sm">© 2026 OrbTech Soluções Digitais • Todos os direitos reservados</p>
+      <p class="text-xs mt-4">Sistemas integrados para gestão do seu negócio</p>
+    </div>
+  </footer>
+
+  <script>
+    // Função para abrir o modal com o conteúdo de cada sistema
+    function openModal(sistema) {
+      const modal = document.getElementById('modalOverlay');
+      const modalBody = document.getElementById('modalBody');
+      
+      let content = '';
+      
+      if (sistema === 'ponto') {
+        content = `
+          <span class="text-6xl block mb-4">⏰</span>
+          <h2 class="text-3xl font-bold mb-4">Ponto Eletrônico OrbTech</h2>
+          <div class="space-y-4">
+            <p class="text-slate-600">Sistema completo de controle de jornada com:</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-camera text-blue-600 text-xl"></i> <strong>Foto obrigatória:</strong> Selfie na batida do ponto</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-blue-600 text-xl"></i> <strong>Trava por GPS:</strong> Só marca dentro da loja</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-file-pdf text-blue-600 text-xl"></i> <strong>Espelho de ponto PDF:</strong> Pronto para assinar</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-clock text-blue-600 text-xl"></i> <strong>Relatórios:</strong> Horas extras, atrasos, banco de horas</li>
+            </ul>
+            <div class="mt-8 flex gap-4">
+              <button onclick="contatoWhatsApp()" class="bg-green-500 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Testar Grátis
+              </button>
+              <button onclick="closeModal()" class="border border-slate-300 px-6 py-3 rounded-xl font-semibold">
+                Fechar
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (sistema === 'holerite') {
+        content = `
+          <span class="text-6xl block mb-4">📄</span>
+          <h2 class="text-3xl font-bold mb-4">Holerite Digital</h2>
+          <div class="space-y-4">
+            <p class="text-slate-600">Gere holerites profissionais automaticamente:</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-file-pdf text-green-600 text-xl"></i> <strong>PDF automático:</strong> Holerite pronto para enviar</li>
+              <li class="flex items-center gap-3"><i class="fa-brands fa-whatsapp text-green-600 text-xl"></i> <strong>Envio por WhatsApp:</strong> Funcionário recebe no celular</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-cloud text-green-600 text-xl"></i> <strong>Arquivo digital:</strong> Acesso de qualquer lugar</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-calculator text-green-600 text-xl"></i> <strong>Cálculos automáticos:</strong> INSS, IRRF, horas extras</li>
+            </ul>
+            <div class="mt-8 flex gap-4">
+              <button onclick="contatoWhatsApp()" class="bg-green-500 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Testar Grátis
+              </button>
+              <button onclick="closeModal()" class="border border-slate-300 px-6 py-3 rounded-xl font-semibold">
+                Fechar
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (sistema === 'estoque') {
+        content = `
+          <span class="text-6xl block mb-4">📦</span>
+          <h2 class="text-3xl font-bold mb-4">Controle de Estoque</h2>
+          <div class="space-y-4">
+            <p class="text-slate-600"><span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Em desenvolvimento</span></p>
+            <p class="text-slate-600 mt-4">Nosso novo sistema de estoque vai oferecer:</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-boxes text-purple-600 text-xl"></i> Cadastro de produtos</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-bell text-purple-600 text-xl"></i> Alertas de estoque baixo</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-chart-line text-purple-600 text-xl"></i> Relatórios de entrada/saída</li>
+            </ul>
+            <p class="text-slate-500 mt-6">Quer ser o primeiro a testar?</p>
+            <div class="mt-4 flex gap-4">
+              <button onclick="contatoWhatsApp()" class="bg-green-500 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+                <i class="fab fa-whatsapp"></i> Quero ser avisado
+              </button>
+              <button onclick="closeModal()" class="border border-slate-300 px-6 py-3 rounded-xl font-semibold">
+                Fechar
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (sistema === 'clientes') {
+        content = `
+          <span class="text-6xl block mb-4">👥</span>
+          <h2 class="text-3xl font-bold mb-4">Gestão de Clientes (CRM)</h2>
+          <div class="space-y-4">
+            <p class="text-slate-600"><span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Em breve</span></p>
+            <p class="text-slate-600">Sistema para fidelizar seus clientes:</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-address-card text-purple-600 text-xl"></i> Cadastro completo</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-cake-candles text-purple-600 text-xl"></i> Aniversariantes</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-chart-simple text-purple-600 text-xl"></i> Histórico de compras</li>
+            </ul>
+            <button onclick="contatoWhatsApp()" class="mt-6 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold w-full">
+              Quero saber quando lançar
+            </button>
+          </div>
+        `;
+      } else if (sistema === 'agendamento') {
+        content = `
+          <span class="text-6xl block mb-4">📅</span>
+          <h2 class="text-3xl font-bold mb-4">Sistema de Agendamento</h2>
+          <div class="space-y-4">
+            <p class="text-slate-600"><span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Em breve</span></p>
+            <p class="text-slate-600">Ideal para salões, clínicas e oficinas:</p>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3"><i class="fa-solid fa-calendar-check text-purple-600 text-xl"></i> Agenda online</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-bell text-purple-600 text-xl"></i> Lembretes automáticos</li>
+              <li class="flex items-center gap-3"><i class="fa-solid fa-clock text-purple-600 text-xl"></i> Controle de horários</li>
+            </ul>
+            <button onclick="contatoWhatsApp()" class="mt-6 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold w-full">
+              Quero testar
+            </button>
+          </div>
+        `;
+      } else if (sistema === 'contato') {
+        content = `
+          <span class="text-6xl block mb-4">💬</span>
+          <h2 class="text-3xl font-bold mb-4">Fale conosco</h2>
+          <p class="text-slate-600 mb-6">Quer testar algum sistema ou tem um projeto personalizado? Fale direto no WhatsApp!</p>
+          <button onclick="contatoWhatsApp()" class="bg-green-500 text-white px-8 py-4 rounded-2xl font-bold text-lg w-full flex items-center justify-center gap-3">
+            <i class="fab fa-whatsapp text-2xl"></i> Iniciar conversa
+          </button>
+          <button onclick="closeModal()" class="mt-4 border border-slate-300 px-8 py-4 rounded-2xl font-bold text-lg w-full">
+            Fechar
+          </button>
+        `;
+      }
+      
+      modalBody.innerHTML = content;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Fechar modal
+    function closeModal(event) {
+      if (event && event.target.classList.contains('modal-overlay')) {
+        // Fecha se clicou fora do conteúdo
+        document.getElementById('modalOverlay').classList.remove('active');
+        document.body.style.overflow = 'auto';
+      } else if (!event) {
+        document.getElementById('modalOverlay').classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+    
+    // Função do WhatsApp (corrigida)
+    function contatoWhatsApp() {
+      const numero = "5516993793808";
+      const mensagem = encodeURIComponent("Olá OrbTech! Vi os sistemas e gostaria de testar na minha loja.");
+      window.open(https://wa.me/${numero}?text=${mensagem}, '_blank');
+    }
+  </script>
+</body>
+</html>

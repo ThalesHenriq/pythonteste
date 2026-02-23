@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbTech Ponto Pro - Sistema Completo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.2);
+            border-color: #2563eb;
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+        
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .mockup-phone {
+            background: #1e293b;
+            border-radius: 40px;
+            padding: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        
+        .mockup-screen {
+            background: white;
+            border-radius: 32px;
+            padding: 1.5rem;
+            min-height: 500px;
+        }
+        
+        .camera-mockup {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            border: 2px dashed #94a3b8;
+        }
+        
+        .camera-mockup i {
+            font-size: 3rem;
+            color: #475569;
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .mockup-button {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .mockup-button.success {
+            background: #22c55e;
+        }
+        
+        .report-table {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .report-table div {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            padding: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .report-table div.header {
+            font-weight: bold;
+            background: #e2e8f0;
+            border-radius: 8px;
+        }
+        
+        .trava-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: #f1f5f9;
+            padding: 0.25rem;
+            border-radius: 50px;
+            width: fit-content;
+        }
+        
+        .trava-option {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: default;
+        }
+        
+        .trava-option.active {
+            background: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Cabeçalho da Página -->
+    <div class="bg-gradient-to-r from-blue-700 to-blue-600 text-white py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-5xl">⏰</span>
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold">Relógio de Ponto OrbTech</h1>
+                    <p class="text-blue-100 text-xl mt-2">Controle de ponto com foto obrigatória e trava de segurança</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-4 mt-8">
+                <button onclick="contatoWhatsApp('ponto')" class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Testar Grátis
+                </button>
+                <button onclick="window.open('https://seu-link-do-ponto.streamlit.app', '_blank')" class="bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-600 transition flex items-center gap-2 border-2 border-white/20">
+                    <i class="fa-solid fa-rocket"></i> Acessar Demo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- Visão Geral + Mockup -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="security-badge">
+                        <i class="fa-solid fa-shield-halved"></i> Portaria 671/2021
+                    </span>
+                    <span class="security-badge">
+                        <i class="fa-solid fa-camera"></i> Foto Obrigatória
+                    </span>
+                </div>
+                
+                <h2 class="text-3xl font-bold mb-4">Segurança total contra fraudes</h2>
+                <p class="text-lg text-slate-600 mb-6">Cada batida de ponto exige uma selfie do funcionário. Trava por GPS ou IP garante que o registro só aconteça dentro da loja.</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 flex-shrink-0 mt-1">📸</div>
+                        <div>
+                            <h3 class="font-bold">Confirmação por Selfie</h3>
+                            <p class="text-slate-600">Foto obrigatória em cada registro. Banco de imagens para consulta.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 flex-shrink-0 mt-1">📍</div>
+                        <div>
+                            <h3 class="font-bold">Trava por GPS ou IP</h3>
+                            <p class="text-slate-600">Escolha: bloqueio por geolocalização (raio configurável) ou por IP da rede da loja.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 flex-shrink-0 mt-1">📊</div>
+                        <div>
+                            <h3 class="font-bold">Relatórios e Espelho de Ponto</h3>
+                            <p class="text-slate-600">Exporte para Excel ou PDF com espelho de ponto profissional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mockup do App -->
+            <div class="mockup-phone">
+                <div class="mockup-screen">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-sm">🏢 Minha Empresa</span>
+                        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">🔒 GPS</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <select class="w-full p-3 border border-slate-200 rounded-xl bg-white">
+                            <option>Selecione seu nome</option>
+                            <option>João Silva</option>
+                            <option>Maria Souza</option>
+                        </select>
+                    </div>
+                    
+                    <div class="camera-mockup mb-4">
+                        <i class="fa-solid fa-camera mb-2"></i>
+                        <p class="text-sm text-slate-500">Foto obrigatória</p>
+                        <div class="w-20 h-20 bg-slate-200 rounded-full mx-auto mt-2 flex items-center justify-center text-slate-400">
+                            <i class="fa-solid fa-user text-3xl"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="button-grid">
+                        <div class="mockup-button">🚀 Entrada</div>
+                        <div class="mockup-button">☕ Saída Almoço</div>
+                        <div class="mockup-button">🍱 Volta Almoço</div>
+                        <div class="mockup-button success">🏠 Saída Final</div>
+                    </div>
+                    
+                    <div class="mt-4 text-xs text-center text-slate-400">
+                        ✓ Saída Final já registrada hoje
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funcionalidades em Detalhe -->
+        <h2 class="text-3xl font-bold text-center mb-12">Tudo que você precisa para controlar a jornada</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 mb-20">
+            <!-- Card 1: Sistema de Trava -->
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mb-4">🔒</div>
+                <h3 class="text-xl font-bold mb-3">Sistema de Trava Inteligente</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Modo GPS:</strong> Define um raio (metros) ao redor da loja. Funcionário só bate ponto dentro da área.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Modo IP:</strong> Bloqueia por endereço de IP. Só funciona no Wi-Fi da empresa.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Configurável:</strong> Escolha o modo ideal para seu negócio.</span>
+                    </li>
+                </ul>
+                
+                <div class="mt-4 p-3 bg-blue-50 rounded-xl">
+                    <div class="trava-toggle mx-auto">
+                        <span class="trava-option active">📍 GPS</span>
+                        <span class="trava-option">🌐 IP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Confirmação por Foto -->
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mb-4">📸</div>
+                <h3 class="text-xl font-bold mb-3">Confirmação por Selfie</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Foto obrigatória:</strong> Cada registro exige uma selfie ao vivo.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Banco de imagens:</strong> Todas as fotos ficam salvas para consulta.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Últimas 10 fotos:</strong> Visualize rapidamente os últimos registros.</span>
+                    </li>
+                </ul>
+                
+                <div class="mt-4 grid grid-cols-3 gap-1">
+                    <div class="bg-slate-100 aspect-square rounded-lg flex items-center justify-center text-2xl">👤</div>
+                    <div class="bg-slate-100 aspect-square rounded-lg flex items-center justify-center text-2xl">👩</div>
+                    <div class="bg-slate-100 aspect-square rounded-lg flex items-center justify-center text-2xl">🧑</div>
+                </div>
+            </div>
+
+            <!-- Card 3: Relatórios Completos -->
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mb-4">📊</div>
+                <h3 class="text-xl font-bold mb-3">Relatórios e Espelho de Ponto</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Filtros:</strong> Por funcionário e período (início/fim).</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Tabela dinâmica:</strong> Organiza Entrada, Saídas e Total do dia.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-blue-500 mt-1"></i>
+                        <span><strong>Exportação:</strong> Excel para análise • PDF com espelho de ponto profissional.</span>
+                    </li>
+                </ul>
+                
+                <!-- Mini tabela exemplo -->
+                <div class="mt-4 report-table">
+                    <div class="header">
+                        <span>Data</span><span>Ent</span><span>S.Almoço</span><span>V.Almoço</span><span>S.Final</span><span>Total</span>
+                    </div>
+                    <div>
+                        <span>23/02</span><span>08:00</span><span>12:00</span><span>13:00</span><span>18:00</span><span>09h00</span>
+                    </div>
+                    <div>
+                        <span>22/02</span><span>08:05</span><span>12:02</span><span>13:05</span><span>18:10</span><span>09h02</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Como Funciona (Passo a Passo) -->
+        <h2 class="text-3xl font-bold text-center mb-12">Como funciona na prática</h2>
+        
+        <div class="grid md:grid-cols-4 gap-4 mb-20">
+            <!-- Passo 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Configuração Inicial</h3>
+                <p class="text-slate-600">Admin define nome da empresa, modo de trava (GPS/IP) e cadastra funcionários.</p>
+                <div class="mt-4 text-blue-600 text-sm">🔧 Área administrativa</div>
+            </div>
+            
+            <!-- Passo 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Funcionário chega</h3>
+                <p class="text-slate-600">Seleciona nome, tira selfie e clica no botão correspondente (Entrada, Almoço...).</p>
+                <div class="mt-4 text-blue-600 text-sm">📸 Validação por foto</div>
+            </div>
+            
+            <!-- Passo 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Trava de segurança</h3>
+                <p class="text-slate-600">Sistema verifica se está no local correto (GPS/IP). Só libera se estiver na loja.</p>
+                <div class="mt-4 text-blue-600 text-sm">📍 Bloqueio automático</div>
+            </div>
+            
+            <!-- Passo 4 -->
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Relatórios e PDF</h3>
+                <p class="text-slate-600">Gestor gera relatórios por período, exporta Excel ou espelho de ponto em PDF.</p>
+                <div class="mt-4 text-blue-600 text-sm">📄 Espelho profissional</div>
+            </div>
+        </div>
+
+        <!-- Demonstração dos Cálculos (Espelho de Ponto) -->
+        <div class="bg-white rounded-3xl p-8 mb-20 shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Exemplo de Espelho de Ponto</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar text-blue-600"></i> Período: 01/02/2026 a 28/02/2026
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="p-2 text-left">Data</th>
+                                    <th class="p-2 text-left">Entrada</th>
+                                    <th class="p-2 text-left">S.Almoço</th>
+                                    <th class="p-2 text-left">V.Almoço</th>
+                                    <th class="p-2 text-left">S.Final</th>
+                                    <th class="p-2 text-left">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-2">23/02</td>
+                                    <td class="p-2">08:00</td>
+                                    <td class="p-2">12:00</td>
+                                    <td class="p-2">13:00</td>
+                                    <td class="p-2">18:00</td>
+                                    <td class="p-2 font-bold">09h00</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-2">22/02</td>
+                                    <td class="p-2">08:05</td>
+                                    <td class="p-2">12:02</td>
+                                    <td class="p-2">13:05</td>
+                                    <td class="p-2">18:10</td>
+                                    <td class="p-2 font-bold">09h02</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-2">21/02</td>
+                                    <td class="p-2">07:55</td>
+                                    <td class="p-2">11:58</td>
+                                    <td class="p-2">12:55</td>
+                                    <td class="p-2">17:58</td>
+                                    <td class="p-2 font-bold">09h06</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-6 rounded-2xl">
+                    <h3 class="font-semibold mb-4">📊 Total do Período</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>Dias trabalhados:</span>
+                            <span class="font-bold">22 dias</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Total de horas:</span>
+                            <span class="font-bold text-blue-700">198h 42min</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Média diária:</span>
+                            <span class="font-bold">09h 02min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-white rounded-xl">
+                        <p class="text-sm text-slate-600 flex items-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-red-500"></i>
+                            PDF gerado automaticamente com espaço para assinatura
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área Admin (Preview) -->
+        <div class="grid md:grid-cols-2 gap-6 mb-20">
+            <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl">
+                <div class="w-16 h-16 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-3xl mb-4">👥</div>
+                <h3 class="text-2xl font-bold mb-3">Gerenciamento de Equipe</h3>
+                <p class="text-slate-600 mb-4">Adicione ou remova funcionários facilmente. Sistema evita nomes duplicados.</p>
+                <div class="flex items-center gap-2 bg-white p-3 rounded-xl">
+                    <input type="text" placeholder="Novo funcionário" class="flex-1 p-2 border rounded-lg" value="João Silva" disabled>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">Adicionar</button>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="bg-white px-3 py-1 rounded-full text-sm">Maria Souza</span>
+                    <span class="bg-white px-3 py-1 rounded-full text-sm">Pedro Santos</span>
+                    <span class="bg-white px-3 py-1 rounded-full text-sm">Ana Paula</span>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl">
+                <div class="w-16 h-16 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-3xl mb-4">📸</div>
+                <h3 class="text-2xl font-bold mb-3">Últimas Fotos</h3>
+                <p class="text-slate-600 mb-4">Visualize as últimas 10 selfies dos registros para conferência.</p>
+                <div class="grid grid-cols-5 gap-2">
+                    <div class="bg-slate-200 aspect-square rounded-lg flex items-center justify-center text-2xl">👤</div>
+                    <div class="bg-slate-200 aspect-square rounded-lg flex items-center justify-center text-2xl">👩</div>
+                    <div class="bg-slate-200 aspect-square rounded-lg flex items-center justify-center text-2xl">🧑</div>
+                    <div class="bg-slate-200 aspect-square rounded-lg flex items-center justify-center text-2xl">👨</div>
+                    <div class="bg-slate-200 aspect-square rounded-lg flex items-center justify-center text-2xl">👧</div>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">João - Entrada 08:00 • Maria - Saída 18:00 • Pedro - Almoço 12:00</p>
+            </div>
+        </div>
+
+        <!-- Benefícios Extras -->
+        <div class="grid md:grid-cols-3 gap-6 mb-20">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <i class="fa-solid fa-bolt text-3xl text-blue-600 mb-3"></i>
+                <h3 class="font-bold mb-2">Sem Hardware</h3>
+                <p class="text-slate-600 text-sm">Funciona no celular do funcionário. Sem custo com relógios de ponto físicos.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <i class="fa-solid fa-clock text-3xl text-blue-600 mb-3"></i>
+                <h3 class="font-bold mb-2">Banco de Horas</h3>
+                <p class="text-slate-600 text-sm">Cálculo automático de horas extras e saldo do período.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <i class="fa-solid fa-mobile-screen text-3xl text-blue-600 mb-3"></i>
+                <h3 class="font-bold mb-2">Interface Simples</h3>
+                <p class="text-slate-600 text-sm">Funcionários não têm dificuldade. Basta selecionar nome e tirar selfie.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Rápido -->
+        <div class="bg-white rounded-3xl p-8 shadow-lg mb-12">
+            <h2 class="text-2xl font-bold mb-6">Perguntas Frequentes</h2>
+            
+            <div class="space-y-4">
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="font-semibold mb-2">O funcionário precisa instalar algo?</h3>
+                    <p class="text-slate-600">Não! Funciona direto no navegador do celular. Basta acessar o link.</p>
+                </div>
+                
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="font-semibold mb-2">Como funciona a trava por GPS?</h3>
+                    <p class="text-slate-600">Você cadastra a latitude/longitude da loja e define um raio em metros. O sistema só libera a batida se o celular estiver dentro desse raio.</p>
+                </div>
+                
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="font-semibold mb-2">E se o funcionário esquecer de bater o ponto?</h3>
+                    <p class="text-slate-600">O sistema não permite registrar fora do horário/local, mas você pode ajustar manualmente nos relatórios ou criar uma regra de tolerância.</p>
+                </div>
+                
+                <div class="pb-4">
+                    <h3 class="font-semibold mb-2">O PDF do espelho de ponto tem validade?</h3>
+                    <p class="text-slate-600">Sim! O PDF contém todas as informações e linhas para assinatura, podendo ser arquivado digitalmente conforme a legislação.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white p-12 rounded-3xl">
+            <h2 class="text-3xl font-bold mb-4">Proteja sua empresa contra fraudes</h2>
+            <p class="text-xl mb-8 opacity-90">Teste grátis o Relógio de Ponto OrbTech agora mesmo</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="contatoWhatsApp('ponto')" class="bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition flex items-center gap-2 justify-center">
+                    <i class="fab fa-whatsapp"></i> Testar via WhatsApp
+                </button>
+                <button onclick="window.open('https://seu-link-do-ponto.streamlit.app', '_blank')" class="bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-800 transition flex items-center gap-2 justify-center">
+                    <i class="fa-solid fa-rocket"></i> Acessar Demonstração
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function contatoWhatsApp(sistema) {
+            const numero = "5516993793808";
+            let mensagem = "";
+            
+            if (sistema === 'ponto') {
+                mensagem = encodeURIComponent("Olá OrbTech! Vi o sistema de Relógio de Ponto completo e gostaria de testar na minha loja.");
+            } else {
+                mensagem = encodeURIComponent("Olá OrbTech! Gostaria de testar o Relógio de Ponto.");
+            }
+            
+            window.open(https://wa.me/${numero}?text=${mensagem}, '_blank');
+        }
+    </script>
+</body>
+</html>

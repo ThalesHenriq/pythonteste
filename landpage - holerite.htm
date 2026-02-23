@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbTech Holerite - Sistema Completo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+        
+        .mockup-screen {
+            background: #1e293b;
+            border-radius: 24px;
+            padding: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .mockup-content {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        
+        .tab-demo {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 0.5rem;
+            display: inline-flex;
+            gap: 0.5rem;
+        }
+        
+        .tab-demo-item {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: default;
+        }
+        
+        .tab-demo-item.active {
+            background: #10b981;
+            color: white;
+        }
+        
+        .calc-highlight {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 0 12px 12px 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Cabeçalho da Página -->
+    <div class="bg-gradient-to-r from-emerald-700 to-emerald-600 text-white py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-5xl">📄</span>
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold">Holerite Digital OrbTech</h1>
+                    <p class="text-emerald-100 text-xl mt-2">Sistema completo de geração de holerites com cálculos automáticos 2026</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-4 mt-8">
+                <button onclick="contatoWhatsApp('holerite')" class="bg-white text-emerald-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-emerald-50 transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Testar Grátis
+                </button>
+                <button onclick="window.open('https://seu-link-do-holerite.streamlit.app', '_blank')" class="bg-emerald-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-emerald-600 transition flex items-center gap-2 border-2 border-white/20">
+                    <i class="fa-solid fa-rocket"></i> Acessar Demo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- Visão Geral -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Chega de cálculos manuais</h2>
+                <p class="text-lg text-slate-600 mb-6">O Holerite OrbTech automatiza toda a folha de pagamento da sua empresa. Interface simples, cálculos precisos e PDF profissional em segundos.</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 flex-shrink-0 mt-1">✓</div>
+                        <div>
+                            <h3 class="font-bold">Cálculos atualizados 2026</h3>
+                            <p class="text-slate-600">INSS progressivo e IRRF por faixas, conforme tabelas oficiais</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 flex-shrink-0 mt-1">✓</div>
+                        <div>
+                            <h3 class="font-bold">Itens variáveis ilimitados</h3>
+                            <p class="text-slate-600">Adicione proventos (horas extras, comissões) e descontos (faltas, adiantamentos)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 flex-shrink-0 mt-1">✓</div>
+                        <div>
+                            <h3 class="font-bold">PDF profissional</h3>
+                            <p class="text-slate-600">Layout limpo com dados da empresa, funcionário e linhas para assinatura</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mockup da Interface -->
+            <div class="mockup-screen">
+                <div class="mockup-content">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                        <span class="text-sm text-slate-400">Holerite OrbTech</span>
+                    </div>
+                    
+                    <!-- Simulação das Abas -->
+                    <div class="tab-demo mb-6">
+                        <span class="tab-demo-item active">📋 Dados Fixos</span>
+                        <span class="tab-demo-item">💰 Cálculo Salarial</span>
+                    </div>
+                    
+                    <!-- Simulação dos Campos -->
+                    <div class="space-y-3">
+                        <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+                        <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                        <div class="h-4 bg-slate-200 rounded w-2/3"></div>
+                        <div class="h-4 bg-emerald-200 rounded w-full"></div>
+                    </div>
+                    
+                    <div class="mt-6 flex justify-end">
+                        <div class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm">Gerar PDF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funcionalidades em Detalhe -->
+        <h2 class="text-3xl font-bold text-center mb-12">Tudo que você precisa em um só lugar</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 mb-20">
+            <!-- Card 1: Cálculos Automáticos -->
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl mb-4">⚡</div>
+                <h3 class="text-xl font-bold mb-3">Cálculos Automáticos</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span><strong>INSS 2026:</strong> Faixas: 7,5% (até R$ 1.621) • 9% (até R$ 2.902,84) • 12% (até R$ 4.354,27) • 14% (até R$ 8.475,55)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span><strong>IRRF 2026:</strong> Faixas mensais com dedução • Cálculo progressivo preciso</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                        <span><strong>Base de cálculo:</strong> Proventos - INSS para IRRF</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Itens Variáveis -->
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl mb-4">➕➖</div>
+                <h3 class="text-xl font-bold mb-3">Itens Variáveis Ilimitados</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-plus-circle text-emerald-500 mt-1"></i>
+                        <span><strong>Proventos:</strong> Horas extras, adicional noturno, comissões, bônus, prêmios</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-minus-circle text-emerald-500 mt-1"></i>
+                        <span><strong>Descontos:</strong> Faltas, atrasos, vale-transporte, vale-refeição, adiantamentos</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-trash text-emerald-500 mt-1"></i>
+                        <span><strong>Remoção fácil:</strong> Cada item tem botão para remover com 1 clique</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 3: PDF Profissional -->
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center text-3xl mb-4">📄</div>
+                <h3 class="text-xl font-bold mb-3">PDF Profissional</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-building text-emerald-500 mt-1"></i>
+                        <span><strong>Cabeçalho:</strong> Nome da empresa, CNPJ, endereço</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-user text-emerald-500 mt-1"></i>
+                        <span><strong>Dados do funcionário:</strong> Nome, CPF, cargo, admissão, competência</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-pen text-emerald-500 mt-1"></i>
+                        <span><strong>Linhas para assinatura:</strong> Funcionário e responsável • Validade legal</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Como Funciona (Passo a Passo) -->
+        <h2 class="text-3xl font-bold text-center mb-12">Como funciona</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8 mb-20">
+            <!-- Passo 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Dados da Empresa e Funcionário</h3>
+                <p class="text-slate-600">Preencha os dados fixos: nome da empresa, CNPJ, dados do funcionário, cargo e competência.</p>
+                <div class="mt-4 bg-slate-100 p-3 rounded-lg">
+                    <code class="text-sm text-slate-700">Empresa: Minha Empresa Ltda<br>Funcionário: João Silva<br>CPF: 000.000.000-00</code>
+                </div>
+            </div>
+            
+            <!-- Passo 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Salário e Itens Variáveis</h3>
+                <p class="text-slate-600">Informe o salário base e adicione todos os proventos e descontos do mês.</p>
+                <div class="mt-4 bg-slate-100 p-3 rounded-lg">
+                    <code class="text-sm text-slate-700">Salário base: R$ 3.000<br>+ Horas extras: R$ 450<br>- Vale transporte: R$ 150</code>
+                </div>
+            </div>
+            
+            <!-- Passo 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="text-xl font-bold mb-3 mt-2">Gere e Compartilhe</h3>
+                <p class="text-slate-600">Veja o resumo dos cálculos e gere o PDF. Envie por WhatsApp ou e-mail.</p>
+                <div class="mt-4 bg-slate-100 p-3 rounded-lg flex items-center justify-between">
+                    <span class="text-sm">Salário líquido:</span>
+                    <span class="font-bold text-emerald-600">R$ 2.850,00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demonstração dos Cálculos -->
+        <div class="bg-white rounded-3xl p-8 mb-20 shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Exemplo de Cálculo (Salário R$ 3.000)</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold mb-3">Proventos</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span>Salário Base</span>
+                            <span>R$ 3.000,00</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span>Horas Extras (10h)</span>
+                            <span>R$ 450,00</span>
+                        </div>
+                        <div class="flex justify-between py-2 font-semibold">
+                            <span>Total Proventos</span>
+                            <span>R$ 3.450,00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-3">Descontos</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span>INSS (9% + 12% parcial)</span>
+                            <span>R$ 324,66</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span>IRRF (cálculo sobre base)</span>
+                            <span>R$ 87,34</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span>Vale Transporte</span>
+                            <span>R$ 150,00</span>
+                        </div>
+                        <div class="flex justify-between py-2 font-semibold">
+                            <span>Total Descontos</span>
+                            <span>R$ 562,00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 p-6 bg-emerald-50 rounded-2xl">
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold">Salário Líquido a Pagar</span>
+                    <span class="text-3xl font-bold text-emerald-600">R$ 2.888,00</span>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-sm text-slate-500">
+                * Cálculo ilustrativo com base nas faixas de INSS e IRRF 2026
+            </div>
+        </div>
+
+        <!-- Benefícios Extras -->
+        <div class="grid md:grid-cols-2 gap-6 mb-20">
+            <div class="bg-gradient-to-br from-emerald-50 to-white p-8 rounded-3xl">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-2xl flex items-center justify-center text-3xl mb-4">📱</div>
+                <h3 class="text-2xl font-bold mb-3">Envio por WhatsApp</h3>
+                <p class="text-slate-600 mb-4">Gere o PDF e envie diretamente para o funcionário pelo WhatsApp. Prático, rápido e sem papel.</p>
+                <div class="flex items-center gap-2 text-emerald-600">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>Compartilhamento em 1 clique</span>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-emerald-50 to-white p-8 rounded-3xl">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-2xl flex items-center justify-center text-3xl mb-4">⚡</div>
+                <h3 class="text-2xl font-bold mb-3">Resumo em Tempo Real</h3>
+                <p class="text-slate-600 mb-4">Conforme você adiciona itens, o sistema já mostra o salário líquido atualizado. Sem surpresas.</p>
+                <div class="calc-highlight">
+                    <span class="font-bold">Total proventos:</span> R$ 3.450,00<br>
+                    <span class="font-bold">Total descontos:</span> R$ 562,00<br>
+                    <span class="font-bold text-emerald-600">Líquido: R$ 2.888,00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Rápido -->
+        <div class="bg-white rounded-3xl p-8 shadow-lg mb-12">
+            <h2 class="text-2xl font-bold mb-6">Perguntas Frequentes</h2>
+            
+            <div class="space-y-4">
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="font-semibold mb-2">As tabelas estão atualizadas para 2026?</h3>
+                    <p class="text-slate-600">Sim! O sistema utiliza as faixas do INSS (7,5% a 14%) e IRRF (isento a 27,5%) com as deduções corretas para 2026.</p>
+                </div>
+                
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="font-semibold mb-2">Posso adicionar vários tipos de descontos?</h3>
+                    <p class="text-slate-600">Sim! Você pode adicionar quantos itens quiser, sejam proventos ou descontos. Cada um aparece no PDF detalhadamente.</p>
+                </div>
+                
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="font-semibold mb-2">O PDF tem valor legal?</h3>
+                    <p class="text-slate-600">Sim, o PDF contém todos os dados necessários e linhas para assinatura do funcionário e responsável, podendo ser arquivado digitalmente.</p>
+                </div>
+                
+                <div class="pb-4">
+                    <h3 class="font-semibold mb-2">Precisa instalar alguma coisa?</h3>
+                    <p class="text-slate-600">Não! Funciona direto no navegador. Basta acessar o link e usar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="text-center bg-gradient-to-r from-emerald-600 to-emerald-500 text-white p-12 rounded-3xl">
+            <h2 class="text-3xl font-bold mb-4">Pronto para simplificar seu RH?</h2>
+            <p class="text-xl mb-8 opacity-90">Teste grátis o Holerite OrbTech agora mesmo</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="contatoWhatsApp('holerite')" class="bg-white text-emerald-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-emerald-50 transition flex items-center gap-2 justify-center">
+                    <i class="fab fa-whatsapp"></i> Testar via WhatsApp
+                </button>
+                <button onclick="window.open('https://seu-link-do-holerite.streamlit.app', '_blank')" class="bg-emerald-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-emerald-800 transition flex items-center gap-2 justify-center">
+                    <i class="fa-solid fa-rocket"></i> Acessar Demonstração
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function contatoWhatsApp(sistema) {
+            const numero = "5516993793808";
+            let mensagem = "";
+            
+            if (sistema === 'holerite') {
+                mensagem = encodeURIComponent("Olá OrbTech! Vi o sistema de Holerite Digital completo e gostaria de testar na minha empresa.");
+            } else {
+                mensagem = encodeURIComponent("Olá OrbTech! Gostaria de testar o Holerite Digital.");
+            }
+            
+            window.open(https://wa.me/${numero}?text=${mensagem}, '_blank');
+        }
+    </script>
+</body>
+</html>
